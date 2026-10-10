@@ -1,0 +1,294 @@
+/* The Haloo AI page's styles, by the owner's design standard for every project (~/.claude/UI.md,
+   2026-10-10). The rules that matter here:
+   - a colour has one meaning and is written as a variable; no bare colour value below the two
+     blocks of variables. green = done, passed, in; amber = waits for someone, mind this;
+     red = failed, blocked; blue = at work, chosen, a link - and the one accent; grey = the rest.
+   - sizes of type: 12 13 14 16 20 24 32. Spaces: multiples of 4. Corners: 8 for buttons and
+     fields, 12 for cards, round for tags. Lines of 1px and grounds tell layers apart, not shadows.
+   - where a colour says something an icon or a word says it too (Lucide, icons.js). */
+:root {
+  --bg: #F9F9FB; --card: #FFFFFF; --text: #1C2024; --text-2: #60646C; --text-3: #8B8D98;
+  --gray-bg: #F0F0F3; --gray-border: #D9D9E0; --gray-solid: #8B8D98; --gray-text: #60646C;
+  --green-bg: #E6F6EB; --green-border: #ADDDC0; --green-solid: #30A46C; --green-text: #218358;
+  --amber-bg: #FFF7C2; --amber-border: #F3D673; --amber-solid: #FFC53D; --amber-text: #AB6400;
+  --red-bg: #FEEBEC; --red-border: #FDBDBE; --red-solid: #E5484D; --red-text: #CE2C31;
+  --blue-bg: #E6F4FE; --blue-border: #ACD8FC; --blue-solid: #0090FF; --blue-text: #0D74CE;
+  --on-solid: #FFFFFF;
+  /* the same Lucide drawings for what the style sheet marks by itself (a status tag, an empty list): made by the same script as icons.js */
+  --i-circle-check: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22/%3E%3Cpath d=%22m9 12 2 2 4-4%22/%3E%3C/svg%3E");
+  --i-circle-x: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22/%3E%3Cpath d=%22m15 9-6 6%22/%3E%3Cpath d=%22m9 9 6 6%22/%3E%3C/svg%3E");
+  --i-clock: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22/%3E%3Cpolyline points=%2212 6 12 12 16 14%22/%3E%3C/svg%3E");
+  --i-triangle-alert: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3%22/%3E%3Cpath d=%22M12 9v4%22/%3E%3Cpath d=%22M12 17h.01%22/%3E%3C/svg%3E");
+  --i-info: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22/%3E%3Cpath d=%22M12 16v-4%22/%3E%3Cpath d=%22M12 8h.01%22/%3E%3C/svg%3E");
+  --i-inbox: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpolyline points=%2222 12 16 12 14 15 10 15 8 12 2 12%22/%3E%3Cpath d=%22M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z%22/%3E%3C/svg%3E");
+  --i-loader-circle: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M21 12a9 9 0 1 1-6.219-8.56%22/%3E%3C/svg%3E");
+  --i-play: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpolygon points=%226 3 20 12 6 21 6 3%22/%3E%3C/svg%3E");
+  --i-chevron-right: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m9 18 6-6-6-6%22/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111113; --card: #18191B; --text: #EDEEF0; --text-2: #B0B4BA; --text-3: #8B8D98;
+    --gray-bg: #18191B; --gray-border: #363A3F; --gray-text: #B0B4BA;
+    --green-bg: #132D21; --green-border: #363A3F; --green-text: #3DD68C;
+    --amber-bg: #302008; --amber-border: #363A3F; --amber-text: #FFCA16;
+    --red-bg: #3B1219; --red-border: #363A3F; --red-text: #FF9592;
+    --blue-bg: #0D2847; --blue-border: #363A3F; --blue-text: #70B8FF;
+  }
+}
+
+/* ---- the page ---------------------------------------------------------------------------- */
+body { margin: 0; font: 400 14px/1.5 system-ui, "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--text); background: var(--bg);
+       font-variant-numeric: tabular-nums; }
+h1 { margin: 0 0 4px; font-size: 20px; font-weight: 600; }
+h2 { margin: 0; font-size: 16px; font-weight: 600; }
+a { color: var(--blue-text); }
+.dim { color: var(--text-2); font-size: 13px; }
+.dim.bad, .line.bad time { color: var(--red-text); }
+.icon { flex: none; display: inline-flex; width: 16px; height: 16px; } .icon svg { width: 100%; height: 100%; }
+
+/* ---- one navigation, on the left: parents and their pages ------------------------------- */
+nav { position: fixed; top: 0; bottom: 0; left: 0; width: 208px; padding: 16px 8px; box-sizing: border-box; background: var(--card);
+      border-right: 1px solid var(--gray-border); overflow-y: auto; }
+nav h1 { display: flex; align-items: center; gap: 8px; padding: 0 8px 12px; font-size: 16px; }
+.logo { width: 24px; height: 24px; flex: none; }
+nav button { display: flex; align-items: center; gap: 8px; width: 100%; height: 32px; margin: 4px 0; padding: 0 8px; border: 0; border-radius: 8px;
+             background: none; color: var(--text); text-align: left; }
+nav button span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+nav button:hover { background: var(--gray-bg); }
+nav button b { font-weight: 400; font-size: 12px; color: var(--text-2); }
+nav button b .icon { vertical-align: middle; }
+nav button.parent { margin-top: 8px; font-weight: 600; }
+nav button.child { width: calc(100% - 16px); margin-left: 16px; }
+nav button.child.on { background: var(--blue-bg); color: var(--blue-text); font-weight: 500; }
+nav button.child.on b { color: var(--blue-text); }
+nav .dim { padding: 16px 8px 0; font-size: 12px; }
+#who a { display: block; padding: 4px 0; color: var(--text-2); text-decoration: none; }
+#who a:hover { text-decoration: underline; } #who a.on { color: var(--blue-text); font-weight: 600; }
+main { margin-left: 208px; padding: 24px 24px 64px; }
+@media (max-width: 700px) {
+  nav { position: static; width: auto; border-right: 0; border-bottom: 1px solid var(--gray-border); padding: 12px 8px; }
+  nav button, nav button.child { display: inline-flex; width: auto; margin-left: 0; }
+  nav button.parent { display: flex; width: 100%; }
+  main { margin-left: 0; padding: 16px 12px 64px; }
+}
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0 0 16px; }
+h1.title { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 24px; font-weight: 600; color: var(--text); }
+h1.title .icon { width: 20px; height: 20px; }
+details.note { margin: 0; } details.note summary { display: inline-flex; align-items: center; gap: 4px; list-style: none; }
+details.note summary::-webkit-details-marker, details.fold > summary::-webkit-details-marker { display: none; }
+details.note p { flex-basis: 100%; margin: 8px 0 0; max-width: 46em; color: var(--text-2); font-size: 13px; }
+details.note[open] { flex-basis: 100%; }
+
+/* ---- buttons and fields: one solid blue button a page, the others white with a grey line -- */
+button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 32px; padding: 0 12px; box-sizing: border-box;
+         border: 1px solid var(--gray-border); border-radius: 8px; background: var(--card); color: var(--text); font: inherit; cursor: pointer; }
+button:hover { background: var(--gray-bg); }
+button:disabled { color: var(--text-3); background: var(--gray-bg); cursor: default; }
+input, select, textarea { box-sizing: border-box; padding: 4px 8px; border: 1px solid var(--gray-border); border-radius: 8px; background: var(--card);
+                          color: var(--text); font: inherit; }
+input, select { height: 32px; }
+input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--blue-solid); outline-offset: 1px; }
+button.act-go, button.act-alt, button.act-all { white-space: nowrap; }
+.act.next button.act-go { border-color: var(--blue-solid); background: var(--blue-solid); color: var(--on-solid); font-weight: 600; }
+.act.next button.act-go:disabled { border-color: var(--gray-border); background: var(--gray-bg); color: var(--text-3); }
+button.act-all { height: 32px; font-size: 12px; background: var(--gray-bg); }
+.more { display: flex; margin: 24px auto; } .more[hidden] { display: none; }
+.ask { display: inline-flex; align-items: center; gap: 8px; } .ask input { width: 72px; }
+
+/* ---- cards --------------------------------------------------------------------------------- */
+.batch { background: var(--card); border: 1px solid var(--gray-border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+.head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.head a { color: var(--text); font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+.head a:hover { color: var(--blue-text); text-decoration: underline; }
+.run .head button { margin-left: auto; }
+details { margin-top: 8px; } summary { cursor: pointer; color: var(--text-2); font-size: 13px; }
+
+/* ---- status tags: round, an icon and a word, ground and letters of the same colour ------- */
+.tag { display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border-radius: 999px; font-size: 12px; line-height: 20px; white-space: nowrap;
+       background: var(--gray-bg); color: var(--gray-text); }
+.tag::before { content: ''; flex: none; width: 12px; height: 12px; background: currentColor; -webkit-mask: var(--i-info) center / contain no-repeat; mask: var(--i-info) center / contain no-repeat; }
+.tag.done, .tag.arrived, .tag.pass { background: var(--green-bg); color: var(--green-text); }
+.tag.done::before, .tag.arrived::before, .tag.pass::before { -webkit-mask-image: var(--i-circle-check); mask-image: var(--i-circle-check); }
+.tag.block, .tag.failed { background: var(--red-bg); color: var(--red-text); }
+.tag.block::before, .tag.failed::before { -webkit-mask-image: var(--i-circle-x); mask-image: var(--i-circle-x); }
+.tag.review { background: var(--amber-bg); color: var(--amber-text); }
+.tag.review::before { -webkit-mask-image: var(--i-clock); mask-image: var(--i-clock); }
+.tag.missing { background: var(--amber-bg); color: var(--amber-text); }
+.tag.missing::before { -webkit-mask-image: var(--i-triangle-alert); mask-image: var(--i-triangle-alert); }
+.tag.wait { background: var(--blue-bg); color: var(--blue-text); }
+.tag.wait::before { -webkit-mask-image: var(--i-clock); mask-image: var(--i-clock); }
+/* .had and .mark stay grey with the "i": said, neither good nor bad */
+
+/* ---- key numbers ---------------------------------------------------------------------------- */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(152px, 1fr)); gap: 12px; margin-top: 12px; }
+.tile { padding: 12px 16px; border: 1px solid var(--gray-border); border-radius: 12px; background: var(--card); color: var(--text-2); font-size: 13px; }
+.tile b { display: block; font-size: 24px; font-weight: 600; line-height: 1.5; color: var(--text); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; margin-top: 12px; }
+.stat { padding: 8px 12px; border: 1px solid var(--gray-border); border-radius: 8px; background: var(--card); color: var(--text-2); font-size: 13px; }
+.stat b { display: block; font-size: 20px; font-weight: 600; line-height: 1.5; color: var(--text); }
+.tile.good, .stat.good { border-color: var(--green-border); background: var(--green-bg); } .tile.good b, .stat.good b { color: var(--green-text); }
+.tile.bad, .stat.bad { border-color: var(--red-border); background: var(--red-bg); } .tile.bad b, .stat.bad b { color: var(--red-text); }
+.tile.warn { border-color: var(--amber-border); background: var(--amber-bg); } .tile.warn b { color: var(--amber-text); }
+.stat.wait { border-color: var(--blue-border); background: var(--blue-bg); } .stat.wait b { color: var(--blue-text); }
+.tile.pick { outline: 2px solid var(--blue-solid); outline-offset: -1px; }
+.big { margin: 12px 0 4px; font-size: 24px; font-weight: 600; } .big b { color: var(--green-text); }
+
+/* ---- what a run or a batch is doing now ---------------------------------------------------- */
+.flow { margin-top: 12px; }
+.state { display: flex; gap: 8px; margin-top: 12px; padding: 8px 12px; border: 1px solid var(--gray-border); border-radius: 8px; white-space: pre-line;
+         background: var(--gray-bg); color: var(--text-2); }
+.state::before { content: ''; flex: none; width: 16px; height: 16px; margin-top: 2px; background: currentColor; -webkit-mask: var(--i-info) center / contain no-repeat; mask: var(--i-info) center / contain no-repeat; }
+.state.live { border-color: var(--blue-border); background: var(--blue-bg); color: var(--blue-text); }
+.state.live::before { -webkit-mask-image: var(--i-loader-circle); mask-image: var(--i-loader-circle); animation: spin 1.2s linear infinite; }
+.state.cut { border-color: var(--red-border); background: var(--red-bg); color: var(--red-text); }
+.state.cut::before { -webkit-mask-image: var(--i-circle-x); mask-image: var(--i-circle-x); }
+.o-arrived { color: var(--green-text); font-weight: 600; } .o-lost, .o-error, .o-gone { color: var(--red-text); }
+.o-skipped { color: var(--amber-text); } .o-had, .o-unfit { color: var(--text-2); }
+.steps { margin: 12px 0 0; padding: 0; list-style: none; border-left: 2px solid var(--gray-border); }
+.steps li { position: relative; padding: 0 0 8px 16px; }
+.steps li::before { content: ''; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gray-solid); }
+.steps li.ok::before { background: var(--green-solid); } .steps li.bad::before { background: var(--red-solid); } .steps li.now::before { background: var(--blue-solid); }
+.steps time { color: var(--text-2); font-size: 12px; margin-right: 8px; }
+.spin { display: inline-block; width: 12px; height: 12px; border: 2px solid var(--gray-border); border-top-color: var(--blue-solid); border-radius: 50%; vertical-align: -2px; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- tables: rows of 40, a thin line between, grey under the pointer --------------------- */
+table { border-collapse: collapse; margin-top: 8px; width: 100%; font-size: 13px; }
+td, th { height: 40px; box-sizing: border-box; text-align: left; padding: 8px; border-top: 1px solid var(--gray-border); vertical-align: middle; overflow-wrap: anywhere; }
+th { color: var(--text-2); font-weight: 500; }
+tbody tr:hover td, table tr:hover td { background: var(--gray-bg); }
+td img { display: block; border-radius: 8px; }
+table.batchrows { margin-top: 8px; } table.batchrows tr.working td { background: var(--blue-bg); color: var(--blue-text); font-weight: 600; }
+.pend-list table { margin-top: 12px; }
+
+/* ---- pictures and the verdict on each: the frame's colour, and the word under it --------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 12px; }
+.pic { border: 2px solid var(--gray-border); border-radius: 8px; overflow: hidden; background: var(--gray-bg); }
+.pic a { display: block; }
+.pic.pass { border-color: var(--green-solid); } .pic.review { border-color: var(--amber-solid); }
+.pic.block { border-color: var(--red-solid); } .pic.error { border-color: var(--gray-solid); }
+.pic.out { opacity: .45; }
+.pic img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.pic span { display: block; padding: 4px; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.pic .who { color: var(--text-2); }
+.say { display: flex; border-top: 1px solid var(--gray-border); }
+.say button { flex: 1; height: 24px; padding: 0; border: 0; border-radius: 0; font-size: 12px; color: var(--text-2); background: var(--card); }
+.say button + button { border-left: 1px solid var(--gray-border); }
+.say button:hover { background: var(--gray-bg); }
+.say button.on { background: var(--blue-bg); color: var(--blue-text); font-weight: 600; }
+.say button:disabled { opacity: .5; cursor: default; }
+
+/* ---- bars. The colours of the parts go in one order everywhere: green, blue, amber, red, grey */
+.goal { height: 8px; margin-top: 8px; border-radius: 4px; background: var(--gray-bg); overflow: hidden; } .goal i { display: block; height: 100%; background: var(--green-solid); }
+.split { display: flex; gap: 2px; height: 12px; margin-top: 12px; border-radius: 4px; overflow: hidden; background: var(--gray-bg); }
+.split i, .line i { display: block; height: 100%; }
+.s-in { background: var(--green-solid); } .s-lost { background: var(--red-solid); } .s-gone { background: var(--amber-solid); } .s-rest { background: var(--gray-solid); }
+.s-gap { background: var(--green-solid); } .s-load { background: var(--blue-solid); } .s-ms { background: var(--amber-solid); } .s-old { background: var(--gray-solid); }
+.key { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; font-size: 12px; color: var(--text-2); }
+.key i:not(.icon) { display: inline-block; width: 8px; height: 8px; margin-right: 4px; border-radius: 50%; }
+.hours { display: flex; align-items: flex-end; gap: 4px; height: 140px; margin-top: 12px; }
+.hours div { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; font-size: 12px; color: var(--text-2); }
+.hours i { display: block; width: 100%; border-radius: 4px 4px 0 0; background: var(--green-solid); }
+.hours b { font-weight: 600; color: var(--text); }
+.lines { margin-top: 12px; }
+.line { display: flex; align-items: center; gap: 8px; height: 16px; margin: 4px 0; font-size: 12px; color: var(--text-2); }
+.line time { flex: none; width: 60px; } .line span { flex: none; width: 44px; text-align: right; }
+.line div { flex: 1; display: flex; gap: 2px; height: 100%; }
+
+/* ---- nothing here, and being read: an icon and a line, never a blank ----------------------- */
+.empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 48px 0; text-align: center; color: var(--text-2); }
+.empty::before { content: ''; width: 20px; height: 20px; background: var(--text-3); -webkit-mask: var(--i-inbox) center / contain no-repeat; mask: var(--i-inbox) center / contain no-repeat; }
+.empty.loading::before { background: var(--blue-solid); -webkit-mask-image: var(--i-loader-circle); mask-image: var(--i-loader-circle); animation: spin 1.2s linear infinite; }
+
+/* ---- the six steps of a batch: done is green with its number, the one at work is blue ---- */
+.steps6 { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0 12px; margin-top: 16px; }
+.step6 .dotrow { display: flex; align-items: center; margin-right: -12px; }
+.dot { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%;
+       border: 2px solid var(--gray-border); background: var(--card); color: var(--text-3); font-size: 12px; font-weight: 600; }
+.rail { flex: 1; height: 2px; background: var(--gray-border); }
+.step6.done .dot, .dot.done { border-color: var(--green-solid); background: var(--green-solid); color: var(--on-solid); }
+.step6.done .rail, .rail.done { background: var(--green-solid); }
+.step6.now .dot, .dot.now { border-color: var(--blue-solid); color: var(--blue-text); }
+.step6 .name { margin-top: 8px; font-weight: 600; }
+.step6 .n { font-size: 24px; font-weight: 600; line-height: 1.5; }
+.step6 .goal { margin-top: 4px; }
+.step6 .goal.live { margin-top: 8px; } .step6 .goal.live i { background: var(--blue-solid); }
+.step6 .dim { margin-top: 4px; font-size: 12px; } .step6 .dim.bad { color: var(--red-text); }
+.step6.todo .name, .step6.todo .n { color: var(--text-3); }
+.stepline { display: flex; align-items: center; gap: 12px; margin-top: 8px; padding: 8px 12px; border: 1px solid var(--gray-border); border-radius: 8px; background: var(--card); }
+.stepline.done { border-color: var(--green-border); background: var(--green-bg); color: var(--green-text); }
+.stepline.now { border-color: var(--blue-border); background: var(--blue-bg); }
+.stepline .dots { flex: none; display: inline-flex; align-items: center; } .stepline .dot { width: 20px; height: 20px; } .stepline .rail { flex: none; width: 16px; }
+.stepline b { font-weight: 600; }
+.stepline button { flex: none; white-space: nowrap; margin-left: auto; }
+@media (max-width: 900px) { .steps6 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; } .step6 .rail { visibility: hidden; } }
+
+/* ---- the settings ---------------------------------------------------------------------------- */
+.setting .head { display: flex; align-items: baseline; gap: 12px; } .setting .head b { font-size: 16px; font-weight: 600; }
+.setting input { width: 80px; }
+.setting .key { align-items: center; font-size: 14px; color: var(--text); }
+.setting .words { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.setting textarea { width: 100%; }
+.setting pre { margin: 8px 0 0; white-space: pre-wrap; font-size: 13px; }
+
+/* ---- which account and shop this browser is working as: to be minded, so amber ------------ */
+.whoami { position: relative; margin: 0 0 16px; padding: 12px 16px 12px 44px; border: 1px solid var(--amber-border); border-radius: 12px; background: var(--amber-bg); color: var(--amber-text); }
+.whoami::before { content: ''; position: absolute; left: 16px; top: 14px; width: 20px; height: 20px; background: currentColor; -webkit-mask: var(--i-triangle-alert) center / contain no-repeat; mask: var(--i-triangle-alert) center / contain no-repeat; }
+.whoami.ok { border-color: var(--green-border); background: var(--green-bg); color: var(--green-text); }
+.whoami.ok::before { -webkit-mask-image: var(--i-circle-check); mask-image: var(--i-circle-check); }
+.whoami.bad { border-color: var(--red-border); background: var(--red-bg); color: var(--red-text); }
+.whoami.bad::before { -webkit-mask-image: var(--i-circle-x); mask-image: var(--i-circle-x); }
+.whoami b { display: block; font-size: 16px; font-weight: 600; }
+.whoami span { display: block; }
+.pop { display: flex; flex-wrap: wrap; gap: 12px 16px; margin: 12px 0; }
+.pop label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-2); }
+.pop select { font-size: 13px; }
+
+/* ---- what can be done on the progress view: three cards in the order it is done (acts.js) - */
+.acts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+@media (max-width: 900px) { .acts { grid-template-columns: 1fr; } }
+.act { padding: 16px; border: 1px solid var(--gray-border); border-radius: 12px; background: var(--card); }
+.act.next { border-color: var(--blue-solid); box-shadow: inset 0 0 0 1px var(--blue-solid); }
+.act.done { background: var(--green-bg); border-color: var(--green-border); }
+.act-head { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; }
+.act-no { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--gray-bg); color: var(--text-2); font-size: 13px; }
+.act.next .act-no { background: var(--blue-solid); color: var(--on-solid); }
+.act.done .act-no { background: var(--green-solid); color: var(--on-solid); }
+.act-num { margin-top: 12px; font-size: 20px; font-weight: 600; line-height: 1.5; }
+.act.next .act-num { font-size: 32px; } /* one largest number a screen: that of the step that is next */
+.act-num .icon { width: 24px; height: 24px; color: var(--green-text); vertical-align: -4px; }
+.act-what { color: var(--text-2); margin-bottom: 12px; font-size: 13px; }
+.act-do { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0; }
+.act-do input { width: 76px; }
+.act-count { display: inline-flex; align-items: center; gap: 4px; }
+.act .dim, .act .o-lost { margin-top: 8px; font-size: 12px; line-height: 1.5; }
+
+/* ---- which of the three ways into Miaoshou the progress view is of ------------------------- */
+.kindtabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; }
+@media (max-width: 900px) { .kindtabs { grid-template-columns: 1fr; } }
+.kindtabs button { display: block; height: auto; padding: 12px 16px; border-radius: 12px; text-align: left; }
+.kindtabs button.on { border-color: var(--blue-solid); background: var(--blue-bg); color: var(--blue-text); }
+.kindtabs button b { display: block; font-size: 16px; font-weight: 600; }
+.kindtabs button span { display: block; margin-top: 4px; font-size: 12px; color: var(--text-2); }
+
+/* ---- a round of publishing as it goes (round.js) ------------------------------------------- */
+.round { margin-top: 12px; padding: 16px; border: 1px solid var(--gray-border); border-radius: 12px; background: var(--card); }
+.round.on { border-color: var(--blue-border); background: var(--blue-bg); }
+.round .goal { margin: 8px 0; }
+.round button { margin-top: 8px; }
+
+/* ---- a word in the corner that does not stop the page (publish.js say) -------------------- */
+#say { display: none; position: fixed; right: 24px; bottom: 24px; z-index: 50; max-width: 420px; padding: 12px 16px; border-radius: 12px;
+       border: 1px solid var(--gray-border); background: var(--text); color: var(--card); font-size: 14px; }
+#say.bad { border-color: var(--red-solid); background: var(--red-solid); color: var(--on-solid); }
+.dot .icon { width: 12px; height: 12px; } .stepline .dot .icon { width: 12px; height: 12px; }
+
+/* ---- what is only looked at: shut under its heading until asked for (core.js fold) --------- */
+details.fold { margin-top: 0; }
+details.fold > summary { display: flex; align-items: center; gap: 8px; list-style: none; cursor: pointer; color: var(--text); }
+details.fold > summary > .icon { color: var(--text-2); transition: transform .15s; }
+details.fold[open] > summary > .icon { transform: rotate(90deg); }
+details.fold[open] > summary { margin-bottom: 8px; }
+/* numbers stand to the right, and so does the heading of their column (core.js dress) */
+td.num, th.num { text-align: right; white-space: nowrap; }
+td .icon { vertical-align: -3px; }
